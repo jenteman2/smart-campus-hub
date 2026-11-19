@@ -1,0 +1,42 @@
+.grille-cours {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 18px;
+}
+
+.carte-cours {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 1px solid #e4e8ef;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 1px 4px rgba(23, 43, 77, 0.05);
+}
+
+.titre-cours {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.titre-cours h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.credits {
+  white-space: nowrap;
+}
+
+.carte-cours p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .grille-cours {
+    grid-template-columns: 1fr;
+  }
+}

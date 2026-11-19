@@ -1,0 +1,35 @@
+<header class="entete">
+  <div class="conteneur barre-navigation">
+    <a routerLink="/accueil" class="logo">Campus Hub</a>
+
+    <nav class="navigation">
+      <a routerLink="/accueil">Accueil</a>
+      <a routerLink="/annonces">Annonces</a>
+      <a routerLink="/cours">Cours</a>
+      <a routerLink="/salles">Salles</a>
+
+      @if (role === 'administrateur') {
+        <a routerLink="/dashboard">Tableau de bord</a>
+      }
+
+      @if (!utilisateur) {
+        <a routerLink="/login">Connexion</a>
+      } @else {
+        <span class="session">
+          Bonjour {{ utilisateur.nom }}
+          (
+          <span class="badge" [ngClass]="classeBadge">
+            @switch (role) {
+              @case ('etudiant') { etudiant }
+              @case ('enseignant') { enseignant }
+              @case ('administrateur') { administrateur }
+              @default { invité }
+            }
+          </span>
+          )
+        </span>
+        <button type="button" class="bouton bouton-rouge" (click)="deconnecter()">Déconnexion</button>
+      }
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,119 @@
+<section class="conteneur">
+  <h1>Cours</h1>
+  <p class="sous-titre">Découvrez les cours proposés par l'ISET Kélibia.</p>
+
+  @if (message) {
+    <p class="message" [ngClass]="typeMessage">{{ message }}</p>
+  }
+
+  @if (estAdmin) {
+    <div class="carte">
+      <h2>{{ modeModification ? 'Modifier le cours' : 'Ajouter un cours' }}</h2>
+
+      <form [formGroup]="form" (ngSubmit)="enregistrerCours()" class="formulaire">
+        <div class="champ">
+          <label for="intitule">Intitulé</label>
+          <input id="intitule" type="text" formControlName="intitule" />
+          @if (form.controls.intitule.touched && form.controls.intitule.hasError('required')) {
+            <p class="error">L'intitulé est obligatoire.</p>
+          }
+        </div>
+
+        <div class="champ">
+          <label for="enseignant">Enseignant</label>
+          <input id="enseignant" type="text" formControlName="enseignant" />
+          @if (form.controls.enseignant.touched && form.controls.enseignant.hasError('required')) {
+            <p class="error">L'enseignant est obligatoire.</p>
+          }
+        </div>
+
+        <div class="champ">
+          <label for="niveau">Niveau</label>
+          <select id="niveau" formControlName="niveau">
+            <option value="">Choisir un niveau</option>
+            <option value="L1">L1</option>
+            <option value="L2">L2</option>
+            <option value="L3">L3</option>
+          </select>
+          @if (form.controls.niveau.touched && form.controls.niveau.hasError('required')) {
+            <p class="error">Le niveau est obligatoire.</p>
+          }
+        </div>
+
+        <div class="champ">
+          <label for="credits">Crédits</label>
+          <input id="credits" type="number" formControlName="credits" />
+          @if (form.controls.credits.touched && form.controls.credits.hasError('required')) {
+            <p class="error">Le nombre de crédits est obligatoire.</p>
+          }
+          @if (form.controls.credits.touched && (form.controls.credits.hasError('min') || form.controls.credits.hasError('max'))) {
+            <p class="error">Les crédits doivent être compris entre 1 et 10.</p>
+          }
+        </div>
+
+        <div class="champ champ-large">
+          <label for="description">Description</label>
+          <textarea id="description" rows="3" formControlName="description"></textarea>
+          @if (form.controls.description.touched && form.controls.description.hasError('required')) {
+            <p class="error">La description est obligatoire.</p>
+          }
+          @if (form.controls.description.touched && form.controls.description.hasError('minlength')) {
+            <p class="error">La description doit contenir au moins 10 caractères.</p>
+          }
+        </div>
+
+        <div class="actions-formulaire">
+          <button type="submit" class="bouton bouton-vert" [disabled]="form.invalid">
+            {{ modeModification ? 'Modifier' : 'Ajouter' }}
+          </button>
+          @if (modeModification) {
+            <button type="button" class="bouton bouton-gris" (click)="annulerModification()">Annuler</button>
+          }
+        </div>
+      </form>
+    </div>
+  }
+
+  <div class="carte">
+    <div class="filtres">
+      <input type="text" [(ngModel)]="recherche" placeholder="Rechercher par intitulé" />
+      <select [(ngModel)]="filtreNiveau">
+        <option value="Tous">Tous</option>
+        <option value="L1">L1</option>
+        <option value="L2">L2</option>
+        <option value="L3">L3</option>
+      </select>
+    </div>
+
+    <div class="grille-cours">
+      @for (cours of coursFiltres; track cours.id) {
+        <article class="carte-cours">
+          <div class="titre-cours">
+            <h3>{{ cours.intitule }}</h3>
+            <span
+              class="credits"
+              [ngStyle]="{
+                'font-weight': cours.credits >= 5 ? 'bold' : 'normal',
+                'font-size': cours.credits >= 5 ? '1.2rem' : '1rem',
+                color: cours.credits >= 5 ? '#172b4d' : '#5c6b80'
+              }"
+            >
+              {{ cours.credits }} crédits
+            </span>
+          </div>
+          <p class="meta">{{ cours.niveau }} • {{ cours.enseignant }}</p>
+          <p>{{ cours.description }}</p>
+
+          @if (estAdmin) {
+            <div class="actions">
+              <button type="button" class="bouton bouton-orange" (click)="preparerModification(cours)">Modifier</button>
+              <button type="button" class="bouton bouton-rouge" (click)="supprimerCours(cours)">Supprimer</button>
+            </div>
+          }
+        </article>
+      } @empty {
+        <p class="vide">Aucun cours.</p>
+      }
+    </div>
+  </div>
+</section>

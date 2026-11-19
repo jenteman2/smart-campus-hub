@@ -1,0 +1,31 @@
+.page-connexion {
+  display: flex;
+  justify-content: center;
+}
+
+.carte-connexion {
+  width: 100%;
+  max-width: 480px;
+}
+
+.carte-connexion .formulaire {
+  grid-template-columns: 1fr;
+}
+
+.comptes-demo {
+  margin-top: 22px;
+  padding: 16px;
+  background: #f1f5fb;
+  border-radius: 8px;
+}
+
+.comptes-demo h2 {
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.comptes-demo ul {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 0.88rem;
+}

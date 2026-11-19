@@ -1,0 +1,119 @@
+<section class="conteneur">
+  @if (utilisateur) {
+    <h1>Annonces</h1>
+    <p class="sous-titre">Toutes les informations de la vie du campus.</p>
+
+    @if (message) {
+      <p class="message" [ngClass]="typeMessage">{{ message }}</p>
+    }
+
+    @if (peutGerer) {
+      <div class="carte">
+        <h2>{{ modeModification ? 'Modifier l’annonce' : 'Ajouter une annonce' }}</h2>
+
+        <form #f="ngForm" (ngSubmit)="enregistrerAnnonce()" class="formulaire">
+          <div class="champ">
+            <label for="titre">Titre</label>
+            <input id="titre" name="titre" type="text" [(ngModel)]="titre" required #titreField="ngModel" />
+            @if (titreField.invalid && (titreField.touched || f.submitted)) {
+              <p class="error">Le titre est obligatoire.</p>
+            }
+          </div>
+
+          <div class="champ">
+            <label for="contenu">Contenu</label>
+            <textarea id="contenu" name="contenu" rows="3" [(ngModel)]="contenu" required minlength="10" #contenuField="ngModel"></textarea>
+            @if (contenuField.invalid && (contenuField.touched || f.submitted)) {
+              <p class="error">Le contenu doit contenir au moins 10 caractères.</p>
+            }
+          </div>
+
+          <div class="champ">
+            <label for="categorie">Catégorie</label>
+            <select id="categorie" name="categorie" [(ngModel)]="categorie" required>
+              <option value="Examen">Examen</option>
+              <option value="Événement">Événement</option>
+              <option value="Administratif">Administratif</option>
+            </select>
+          </div>
+
+          <div class="actions-formulaire">
+            <button type="submit" class="bouton bouton-vert" [disabled]="f.invalid">
+              {{ modeModification ? 'Modifier' : 'Ajouter' }}
+            </button>
+            @if (modeModification) {
+              <button type="button" class="bouton bouton-gris" (click)="annulerModification()">Annuler</button>
+            }
+          </div>
+        </form>
+      </div>
+    }
+
+    <div class="carte">
+      <div class="titre-section">
+        <h2>Liste des annonces</h2>
+        <span class="compteur">Nombre d'annonces : {{ nombreAnnonces }}</span>
+      </div>
+
+      <div class="filtres">
+        <input type="text" [(ngModel)]="recherche" placeholder="Rechercher par titre ou contenu" />
+        <select [(ngModel)]="filtreCategorie">
+          <option value="Toutes">Toutes</option>
+          <option value="Examen">Examen</option>
+          <option value="Événement">Événement</option>
+          <option value="Administratif">Administratif</option>
+        </select>
+        <select [(ngModel)]="triDate">
+          <option value="desc">Date : plus récentes</option>
+          <option value="asc">Date : plus anciennes</option>
+        </select>
+      </div>
+
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Titre</th>
+              <th>Contenu</th>
+              <th>Catégorie</th>
+              <th>Auteur</th>
+              <th>Date</th>
+              @if (peutGerer) {
+                <th>Actions</th>
+              }
+            </tr>
+          </thead>
+          <tbody>
+            @for (annonce of annoncesFiltrees; track annonce.id) {
+              <tr>
+                <td><strong>{{ annonce.titre }}</strong></td>
+                <td>{{ annonce.contenu }}</td>
+                <td>
+                  <span class="badge" [ngClass]="classeCategorie(annonce.categorie)">{{ annonce.categorie }}</span>
+                </td>
+                <td>{{ annonce.auteur }}</td>
+                <td>{{ annonce.date }}</td>
+                @if (peutGerer) {
+                  <td class="actions">
+                    <button type="button" class="bouton bouton-orange" (click)="preparerModification(annonce)">Modifier</button>
+                    <button type="button" class="bouton bouton-rouge" (click)="supprimerAnnonce(annonce)">Supprimer</button>
+                  </td>
+                }
+              </tr>
+            } @empty {
+              <tr>
+                <td [attr.colspan]="peutGerer ? 6 : 5">Aucune annonce.</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  } @else {
+    <div class="carte message-connexion">
+      <h1>Annonces</h1>
+      <p>Veuillez vous connecter pour consulter les annonces.</p>
+      <a routerLink="/login" class="bouton bouton-vert">Se connecter</a>
+    </div>
+  }
+</section>

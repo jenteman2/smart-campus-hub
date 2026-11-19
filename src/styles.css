@@ -1,0 +1,358 @@
+/* Styles partagés : police, conteneur, boutons, tableaux, formulaires, messages et badges */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: #263238;
+  background: #f4f6fa;
+  line-height: 1.5;
+}
+
+main {
+  min-height: calc(100vh - 130px);
+  padding: 28px 0;
+}
+
+.conteneur {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+h1,
+h2,
+h3 {
+  color: #172b4d;
+  margin-top: 0;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+a {
+  color: #0b6bcb;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.sous-titre {
+  color: #5c6b80;
+  margin-top: -8px;
+}
+
+.carte {
+  background: #fff;
+  border-radius: 10px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 10px rgba(23, 43, 77, 0.08);
+}
+
+.carte h2 {
+  font-size: 1.3rem;
+  margin-bottom: 16px;
+}
+
+/* Formulaires */
+.formulaire {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.champ {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.champ-large,
+.actions-formulaire {
+  grid-column: 1 / -1;
+}
+
+label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #172b4d;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccd3df;
+  border-radius: 6px;
+  font: inherit;
+  font-size: 0.95rem;
+  background: #fff;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid #4a90e2;
+  border-color: #4a90e2;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.actions-formulaire,
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Boutons */
+.bouton {
+  display: inline-block;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.bouton:hover {
+  opacity: 0.85;
+  text-decoration: none;
+}
+
+.bouton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.bouton-vert {
+  background: #2e7d32;
+  color: #fff;
+}
+
+.bouton-orange {
+  background: #ef6c00;
+  color: #fff;
+}
+
+.bouton-rouge {
+  background: #c62828;
+  color: #fff;
+}
+
+.bouton-gris {
+  background: #607d8b;
+  color: #fff;
+}
+
+/* Messages */
+.message {
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin: 12px 0 20px;
+  font-weight: 600;
+}
+
+.success {
+  background: #e6f4ea;
+  color: #1b5e20;
+  border: 1px solid #b7dfc2;
+}
+
+.error {
+  background: #fdecea;
+  color: #b71c1c;
+  border: 1px solid #f5c2c0;
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin: 6px 0;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* Tableaux */
+.table-responsive {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid #e4e8ef;
+  vertical-align: top;
+  font-size: 0.9rem;
+}
+
+th {
+  background: #172b4d;
+  color: #fff;
+  white-space: nowrap;
+}
+
+tbody tr:hover {
+  background: #f1f5fb;
+}
+
+/* Badges */
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.badge-etudiant,
+.badge-evenement {
+  background: #e3f2fd;
+  color: #0d47a1;
+}
+
+.badge-enseignant,
+.badge-administratif {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.badge-admin {
+  background: #f3e5f5;
+  color: #6a1b9a;
+}
+
+.badge-examen {
+  background: #fdecea;
+  color: #b71c1c;
+}
+
+/* Divers */
+.titre-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.compteur {
+  font-weight: 600;
+  color: #172b4d;
+}
+
+.filtres {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.filtres input {
+  flex: 1 1 240px;
+}
+
+.filtres select {
+  flex: 0 1 210px;
+}
+
+.vide {
+  color: #5c6b80;
+  font-style: italic;
+}
+
+.meta {
+  color: #5c6b80;
+  font-size: 0.85rem;
+}
+
+/* En-tête et pied de page */
+.entete {
+  background: #172b4d;
+  color: #fff;
+}
+
+.barre-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+.logo {
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.navigation a {
+  color: #dce4f2;
+}
+
+.session {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+}
+
+.pied-de-page {
+  background: #172b4d;
+  color: #c9d4e6;
+  text-align: center;
+  padding: 16px;
+  font-size: 0.85rem;
+}
+
+.pied-de-page p {
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .formulaire {
+    grid-template-columns: 1fr;
+  }
+
+  .barre-navigation,
+  .navigation {
+    justify-content: center;
+  }
+
+  table {
+    min-width: 640px;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+}

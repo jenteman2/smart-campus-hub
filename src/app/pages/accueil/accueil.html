@@ -1,0 +1,52 @@
+<section class="conteneur accueil">
+  <div class="carte hero">
+    @if (utilisateur) {
+      <h1>Bienvenue {{ utilisateur.nom }} sur Campus Hub !</h1>
+      @switch (role) {
+        @case ('etudiant') {
+          <p>Retrouvez vos cours, les annonces et les réservations de salles de l'ISET Kélibia.</p>
+        }
+        @case ('enseignant') {
+          <p>Publiez vos annonces, réservez une salle et suivez vos cours depuis votre espace.</p>
+        }
+        @case ('administrateur') {
+          <p>Gérez les annonces, les cours et les salles, et consultez le tableau de bord.</p>
+        }
+        @default {
+          <p>Bienvenue sur le portail de l'ISET Kélibia.</p>
+        }
+      }
+    } @else {
+      <h1>Bienvenue sur Campus Hub</h1>
+      <p>
+        Le portail de l'ISET Kélibia : annonces, cours et réservation de salles.
+        <a routerLink="/login">Connectez-vous</a> pour accéder à toutes les fonctionnalités.
+      </p>
+    }
+  </div>
+
+  <div class="carte">
+    <div class="titre-section">
+      <h2>Dernières annonces</h2>
+      <a routerLink="/annonces" class="lien">Voir toutes les annonces</a>
+    </div>
+
+    @if (message) {
+      <p class="message" [ngClass]="typeMessage">{{ message }}</p>
+    }
+
+    @if (dernieresAnnonces.length === 0) {
+      <p class="vide">Aucune annonce disponible.</p>
+    } @else {
+      <div class="grille-annonces">
+        @for (annonce of dernieresAnnonces; track annonce.id) {
+          <article class="carte-annonce">
+            <h3>{{ annonce.titre }}</h3>
+            <p class="meta">{{ annonce.categorie }} • {{ annonce.date }} • {{ annonce.auteur }}</p>
+            <p>{{ annonce.contenu }}</p>
+          </article>
+        }
+      </div>
+    }
+  </div>
+</section>

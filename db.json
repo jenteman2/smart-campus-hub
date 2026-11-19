@@ -1,0 +1,31 @@
+{
+  "users": [
+    { "id": 1, "nom": "Admin Campus", "email": "admin@campus.tn", "motDePasse": "admin123", "role": "administrateur" },
+    { "id": 2, "nom": "Hana Ben Dhafer", "email": "enseignant@campus.tn", "motDePasse": "ens123", "role": "enseignant" },
+    { "id": 3, "nom": "Sami Trabelsi", "email": "etudiant@campus.tn", "motDePasse": "etu123", "role": "etudiant" }
+  ],
+  "annonces": [
+    { "id": 1, "titre": "Examen final de Développement Web", "contenu": "L'examen final aura lieu le 20 décembre dans la salle A1. Apportez votre support de cours.", "categorie": "Examen", "auteur": "Hana Ben Dhafer", "date": "2026-11-15" },
+    { "id": 2, "titre": "Journée portes ouvertes", "contenu": "L'ISET Kélibia organise une journée portes ouvertes pour les nouveaux étudiants.", "categorie": "Événement", "auteur": "Admin Campus", "date": "2026-11-12" },
+    { "id": 3, "titre": "Inscription au club informatique", "contenu": "Les inscriptions au club informatique sont ouvertes jusqu'à la fin du mois.", "categorie": "Administratif", "auteur": "Admin Campus", "date": "2026-11-10" },
+    { "id": 4, "titre": "Rattrapage pour les absents", "contenu": "Une session de rattrapage est prévue pour les étudiants absents au contrôle continu.", "categorie": "Examen", "auteur": "Hana Ben Dhafer", "date": "2026-11-05" }
+  ],
+  "cours": [
+    { "id": 1, "intitule": "Développement Web", "enseignant": "Hana Ben Dhafer", "niveau": "L3", "credits": 6, "description": "HTML, CSS, JavaScript et Angular pour construire des applications modernes." },
+    { "id": 2, "intitule": "Algorithmique et Structures de Données", "enseignant": "Mohamed Ali", "niveau": "L1", "credits": 5, "description": "Bases de l'algorithmique, complexité, listes, piles et files." },
+    { "id": 3, "intitule": "Base de données", "enseignant": "Leila Khelifa", "niveau": "L2", "credits": 4, "description": "Modélisation relationnelle, SQL et conception de bases de données." },
+    { "id": 4, "intitule": "Réseaux informatiques", "enseignant": "Karim Sassi", "niveau": "L2", "credits": 3, "description": "Protocoles TCP/IP, adressage et architecture des réseaux." },
+    { "id": 5, "intitule": "Mathématiques discrètes", "enseignant": "Sonia Mejri", "niveau": "L1", "credits": 2, "description": "Logique, ensembles, graphes et démonstrations mathématiques." }
+  ],
+  "salles": [
+    { "id": 1, "nom": "Salle A1", "type": "Cours", "capacite": 60 },
+    { "id": 2, "nom": "Salle B2", "type": "Cours", "capacite": 40 },
+    { "id": 3, "nom": "Laboratoire Info 1", "type": "Laboratoire", "capacite": 30 },
+    { "id": 4, "nom": "Salle d'étude C", "type": "Étude", "capacite": 20 }
+  ],
+  "reservations": [
+    { "id": 1, "salleId": 1, "titre": "Cours Développement Web", "reservePar": "Hana Ben Dhafer", "date": "2026-11-25", "heureDebut": "09:00", "heureFin": "11:00" },
+    { "id": 2, "salleId": 3, "titre": "TP Angular", "reservePar": "Hana Ben Dhafer", "date": "2026-11-25", "heureDebut": "14:00", "heureFin": "16:00" },
+    { "id": 3, "salleId": 2, "titre": "Réunion pédagogique", "reservePar": "Admin Campus", "date": "2026-11-26", "heureDebut": "10:00", "heureFin": "12:00" }
+  ]
+}

@@ -1,0 +1,72 @@
+<section class="conteneur">
+  @if (estAdmin) {
+    <h1>Tableau de bord</h1>
+    <p class="sous-titre">Vue d'ensemble de l'activité du campus.</p>
+
+    @if (message) {
+      <p class="message" [ngClass]="typeMessage">{{ message }}</p>
+    }
+
+    <div class="grille-stats">
+      <article class="carte-stat stat-annonces">
+        <h2>Annonces</h2>
+        <p class="valeur">{{ totalAnnonces }}</p>
+        <p class="legende">Nombre total d'annonces</p>
+      </article>
+      <article class="carte-stat stat-cours">
+        <h2>Cours</h2>
+        <p class="valeur">{{ totalCours }}</p>
+        <p class="legende">Nombre total de cours</p>
+      </article>
+      <article class="carte-stat stat-salles">
+        <h2>Salles</h2>
+        <p class="valeur">{{ totalSalles }}</p>
+        <p class="legende">Nombre total de salles</p>
+      </article>
+      <article class="carte-stat stat-reservations">
+        <h2>Réservations</h2>
+        <p class="valeur">{{ totalReservations }}</p>
+        <p class="legende">Nombre total de réservations</p>
+      </article>
+    </div>
+
+    <div class="carte">
+      <h2>Réservations par salle</h2>
+      @for (salle of salles; track salle.id) {
+        <div class="ligne-barre">
+          <span class="etiquette">{{ salle.nom }}</span>
+          <div class="barre">
+            <div
+              class="barre-interne"
+              [ngClass]="classeBarre(compterReservations(salle.id))"
+              [ngStyle]="{ 'width': pourcentageSalle(salle.id) + '%' }"
+            ></div>
+          </div>
+          <span class="valeur-barre">{{ compterReservations(salle.id) }}</span>
+        </div>
+      }
+    </div>
+
+    <div class="carte">
+      <h2>Cours par niveau</h2>
+      @for (niveau of niveaux; track niveau) {
+        <div class="ligne-barre">
+          <span class="etiquette">{{ niveau }}</span>
+          <div class="barre">
+            <div
+              class="barre-interne"
+              [ngClass]="classeBarre(compterNiveau(niveau))"
+              [ngStyle]="{ 'width': pourcentageNiveau(niveau) + '%' }"
+            ></div>
+          </div>
+          <span class="valeur-barre">{{ compterNiveau(niveau) }}</span>
+        </div>
+      }
+    </div>
+  } @else {
+    <div class="carte acces-refuse">
+      <h1>Tableau de bord</h1>
+      <p>Accès réservé à l'administrateur.</p>
+    </div>
+  }
+</section>

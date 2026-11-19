@@ -1,0 +1,43 @@
+.hero {
+  background: linear-gradient(135deg, #172b4d, #355c9c);
+  color: #fff;
+}
+
+.hero h1,
+.hero p {
+  color: #fff;
+}
+
+.hero a {
+  color: #ffe0a3;
+  text-decoration: underline;
+}
+
+.grille-annonces {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.carte-annonce {
+  border: 1px solid #e4e8ef;
+  border-left: 4px solid #355c9c;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.carte-annonce h3 {
+  font-size: 1.05rem;
+  margin-bottom: 6px;
+}
+
+.carte-annonce p {
+  margin: 6px 0 0;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .grille-annonces {
+    grid-template-columns: 1fr;
+  }
+}

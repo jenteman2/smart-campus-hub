@@ -1,0 +1,122 @@
+<section class="conteneur">
+  <h1>Réservation de salles</h1>
+  <p class="sous-titre">Consultez les salles disponibles et réservez un créneau.</p>
+
+  @if (message) {
+    <p class="message" [ngClass]="typeMessage">{{ message }}</p>
+  }
+
+  @if (peutReserver) {
+    <div class="carte">
+      <h2>Réserver une salle</h2>
+
+      <form [formGroup]="form" (ngSubmit)="reserver()" class="formulaire">
+        <div class="champ">
+          <label for="salleId">Salle</label>
+          <select id="salleId" formControlName="salleId">
+            <option [ngValue]="0">Choisir une salle</option>
+            @for (salle of salles; track salle.id) {
+              <option [ngValue]="salle.id">{{ salle.nom }}</option>
+            }
+          </select>
+          @if (form.controls.salleId.touched && form.controls.salleId.invalid) {
+            <p class="error">Veuillez choisir une salle.</p>
+          }
+        </div>
+
+        <div class="champ">
+          <label for="titre">Titre de la réservation</label>
+          <input id="titre" type="text" formControlName="titre" />
+          @if (form.controls.titre.touched && form.controls.titre.hasError('required')) {
+            <p class="error">Le titre est obligatoire.</p>
+          }
+        </div>
+
+        <div class="champ">
+          <label for="date">Date</label>
+          <input id="date" type="date" [min]="aujourdhui" formControlName="date" />
+          @if (form.controls.date.touched && form.controls.date.hasError('required')) {
+            <p class="error">La date est obligatoire.</p>
+          }
+        </div>
+
+        <div class="champ">
+          <label for="heureDebut">Heure de début</label>
+          <input id="heureDebut" type="time" formControlName="heureDebut" />
+          @if (form.controls.heureDebut.touched && form.controls.heureDebut.hasError('required')) {
+            <p class="error">L'heure de début est obligatoire.</p>
+          }
+        </div>
+
+        <div class="champ">
+          <label for="heureFin">Heure de fin</label>
+          <input id="heureFin" type="time" formControlName="heureFin" />
+          @if (form.controls.heureFin.touched && form.controls.heureFin.hasError('required')) {
+            <p class="error">L'heure de fin est obligatoire.</p>
+          }
+        </div>
+
+        <div class="actions-formulaire">
+          <button type="submit" class="bouton bouton-vert" [disabled]="form.invalid">Réserver</button>
+        </div>
+      </form>
+    </div>
+  }
+
+  <div class="carte">
+    <h2>Les salles</h2>
+    <div class="grille-salles">
+      @for (salle of salles; track salle.id) {
+        <article class="carte-salle">
+          <h3>{{ salle.nom }}</h3>
+          <p>
+            <span class="badge" [ngClass]="classeType(salle.type)">{{ salle.type }}</span>
+          </p>
+          <p class="meta">Capacité : {{ salle.capacite }} places</p>
+        </article>
+      } @empty {
+        <p class="vide">Aucune salle.</p>
+      }
+    </div>
+  </div>
+
+  <div class="carte">
+    <h2>Réservations</h2>
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>Salle</th>
+            <th>Titre</th>
+            <th>Date</th>
+            <th>Début</th>
+            <th>Fin</th>
+            <th>Réservé par</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (reservation of reservations; track reservation.id) {
+            <tr>
+              <td>{{ getNomSalle(reservation.salleId) }}</td>
+              <td>{{ reservation.titre }}</td>
+              <td>{{ reservation.date }}</td>
+              <td>{{ reservation.heureDebut }}</td>
+              <td>{{ reservation.heureFin }}</td>
+              <td>{{ reservation.reservePar }}</td>
+              <td class="actions">
+                @if (peutSupprimer(reservation)) {
+                  <button type="button" class="bouton bouton-rouge" (click)="supprimerReservation(reservation)">Supprimer</button>
+                }
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="7">Aucune réservation.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
