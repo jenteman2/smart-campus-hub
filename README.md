@@ -83,14 +83,3 @@ campus-hub/
 │       ├── layout/              # Composants header et footer
 │       └── pages/               # login, accueil, annonces, cours, salles, dashboard
 ```
-
-## Correspondance avec les TP
-
-| Partie du projet | Concept illustré | TP |
-| --- | --- | --- |
-| Interpolations, `[property]`, `(event)`, `[(ngModel)]`, getters | Data binding et gestion de l'état du composant | TP5 |
-| `@if`, `@for`, `@switch`, `routerLink`, `NgClass`, `NgStyle`, rôles | Directives de contrôle, navigation et styles dynamiques | TP6 |
-| Formulaires template-driven (login, annonces) et réactifs (cours, salles) | Validation des formulaires, `markAllAsTouched()` | TP7 |
-| Services `HttpClient`, Observables, `provideHttpClient()`, json-server | Communication HTTP avec une API REST | TP8 |
-| CRUD complet, recherche, filtre et tri des annonces ; tableaux et cartes | Gestion de données côté client | TP9 |
-| Tableau de bord administrateur | Statistiques simples avec barres CSS | Synthèse TP5–TP9 |
